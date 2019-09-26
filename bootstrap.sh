@@ -12,7 +12,8 @@ echo "<< Let's go >>"
 # conda init bash
 # source ~/.bashrc
 # This above doesn't work because .bashrc exits early if not in interactive setting.
-# eval "$(conda shell.bash hook)"
+eval "$(conda shell.bash hook)"
+conda config --set allow_softlinks False
 
 ## create the env on shared storage
 if [ -z "$ENV_BUILD_VERSION" ]
