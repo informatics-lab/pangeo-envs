@@ -21,9 +21,16 @@ then
       echo "\$ENV_BUILD_VERSION is empty"
       exit 1
 fi
+TMP_DEST="~/tmp-env"
 ENV_DEST="/envs/$ENV_BUILD_VERSION"
+
+
+
+conda env create -p "$TMP_DEST"  -f env.yml
+
 rm -rf $ENV_DEST
-conda env create -p "$ENV_DEST"  -f env.yml
+
+cp -r $TMP_DEST $ENV_DEST
 
 # ## export it
 # EXPORT_TAR=/home/jovyan/"$ENV_NAME".tar.gz
