@@ -9,9 +9,6 @@ ls -l /envs
 
 conda env list
 
-# 
-
-
 ENV_NAME="export"
 
 ## set init conda
