@@ -15,7 +15,13 @@ echo "<< Let's go >>"
 # eval "$(conda shell.bash hook)"
 
 ## create the env on shared storage
+if [ -z "$ENV_BUILD_VERSION" ]
+then
+      echo "\$ENV_BUILD_VERSION is empty"
+      exit 1
+fi
 ENV_DEST="/envs/$ENV_BUILD_VERSION"
+rm -rf $ENV_DEST
 conda env create -p "$ENV_DEST"  -f env.yml
 
 # ## export it
