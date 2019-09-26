@@ -28,6 +28,6 @@ conda pack -n "$ENV_NAME" -o $EXPORT_TAR
 
 ## extract to shared storage
 ENV_DEST="/envs/$ENV_BUILD_VERSION"
-rm -r /envs/$ENV_BUILD_VERSION
+rm -rf /envs/$ENV_BUILD_VERSION
 mkdir -p $ENV_DEST
 tar -xzf $EXPORT_TAR -C $ENV_DEST
