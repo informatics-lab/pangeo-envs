@@ -19,13 +19,10 @@ ENV_NAME="export"
 eval "$(conda shell.bash hook)"
 
 ## create the env
-conda env create -n "$ENV_NAME" -y -f env.yml
-conda activate $ENV_NAME
-conda install zarr -y # and the rest. 
+conda env create -n "$ENV_NAME"  -f env.yml
 
 ## export it
 EXPORT_TAR=/home/jovyan/"$ENV_NAME".tar.gz
-conda activate base
 conda install -c conda-forge conda-pack -y
 conda pack -n "$ENV_NAME" -o $EXPORT_TAR
 
