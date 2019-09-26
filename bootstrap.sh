@@ -21,12 +21,14 @@ then
       echo "\$ENV_BUILD_VERSION is empty"
       exit 1
 fi
-TMP_DEST="~/tmp-env"
+TMP_DEST="/home/jovyan/tmp-env"
 ENV_DEST="/envs/$ENV_BUILD_VERSION"
 
 
 
 conda env create -p "$TMP_DEST"  -f env.yml
+
+ls -l /home/jovyan/tmp-env
 
 rm -rf $ENV_DEST
 
