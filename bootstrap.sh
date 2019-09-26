@@ -32,7 +32,7 @@ ls -l /home/jovyan/tmp-env
 
 rm -rf $ENV_DEST
 
-cp -r $TMP_DEST $ENV_DEST
+cp -rL $TMP_DEST $ENV_DEST
 
 # ## export it
 # EXPORT_TAR=/home/jovyan/"$ENV_NAME".tar.gz
