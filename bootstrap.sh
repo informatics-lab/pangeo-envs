@@ -9,4 +9,4 @@ ls -l /envs
 
 conda env list
 
-sleep 60
+sleep 300
