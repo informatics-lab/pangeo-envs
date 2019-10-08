@@ -22,3 +22,5 @@ curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
 
 # log in to azure
 az login --service-principal --username ${SP_APP_ID} --password ${SP_PASSWORD} --tenant ${SP_TENANT_ID}
+
+echo "*** Logged in to Azure ***"

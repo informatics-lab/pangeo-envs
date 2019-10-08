@@ -7,7 +7,10 @@ python:
 install:
   - "$TRAVIS_BUILD_DIR/scripts/setup.sh"
 
+script:
+  - bash -c 'echo SKIP TESTS'
+
 deploy:
-- provider: script
-  skip_cleanup: true
-  script: bash $TRAVIS_BUILD_DIR/scripts/launch-build-k8.sh
+  - provider: script
+    skip_cleanup: true
+    script: bash $TRAVIS_BUILD_DIR/scripts/launch-build-k8.sh

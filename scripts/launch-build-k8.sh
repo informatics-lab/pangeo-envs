@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 set -ex
+echo "Launch build job on kubernetes"
 
 az aks get-credentials -g "$ENV" -n "$ENV" --overwrite-existing
 cat env-builder-template.yaml | \
