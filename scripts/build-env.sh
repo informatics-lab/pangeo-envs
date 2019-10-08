@@ -3,20 +3,33 @@ set -ex
 
 BASE_DIR="/envs/auto-build-envs"
 TMP_ID=$(LC_ALL=C tr -dc 'A-Za-z0-9' </dev/urandom | head -c 9 ; echo)
-TMP_DIR="${BASE_DIR}/${TMP_ID}"
+UID_DIR="${BASE_DIR}/${TMP_ID}"
 DEST_DIR="${BASE_DIR}/${ENV_NAME}"
 PRE_DELETE_DIR="${DEST_DIR}.tmp"
 
-echo "*** Create env in tmp location: $TMP_DIR"
-conda env create -f env.yaml -p $TMP_DIR
+# create env in unique location 
+echo "*** Create env in unique location: $UID_DIR"
+conda env create -f env.yaml -p $UID_DIR
 
-echo "*** Move existing env if exists: $DEST_DIR"
-mv $DEST_DIR ${PRE_DELETE_DIR} || echo "$DEST_DIR doesn't exist"
+# Clear existing version if needed
+if [[ -f "$DEST_DIR" ]]; then
+    echo "*** $DEST_DIR exists. Remove link"
+    cd $BASE_DIR
+    OLD_TARGET=$(readlink $DEST_DIR) 
+    rm $BASE_DIR
+    echo "*** $DEST_DIR link removed. Target $OLD_TARGET"
+fi
 
-echo "*** Rename env from temp location to dest location"
-mv $TMP_DIR $DEST_DIR
+# link unique name to env name
+echo "*** Link env from temp location to dest location"
+ln -s $UID_DIR $DEST_DIR
 
-echo "*** Remove old tmp env if exist"
-rm -rf $PRE_DELETE_DIR || echo " $PRE_DELETE_DIR doesn't exist"
+# delete old env if exists
+if [ -z "$OLD_TARGET" ]; then
+    echo "*** remove old version of $ENV_NAME at $OLD_TARGET"
+    rm -r $OLD_TARGET
+    echo "*** $OLD_TARGET deleted"
+fi
+
 
 echo "** Done: ${ENV_NAME} at ${DEST_DIR}"
