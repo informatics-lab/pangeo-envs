@@ -1,7 +1,7 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: env-builder
+  name: env-builder-${ENV_NAME}
 spec:
   template:
     spec:
@@ -20,7 +20,7 @@ spec:
         - name: COMMIT
           value: "${COMMIT}"
       containers:
-      - name: env-builder
+      - name: env-builder-${ENV_NAME}
         image: jupyterhub/singleuser
         command: ["bash",  "-c", "cd /repo; ./scripts/build-env.sh"]
         volumeMounts:
