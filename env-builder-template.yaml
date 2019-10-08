@@ -1,0 +1,43 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: env-builder
+spec:
+  template:
+    spec:
+      securityContext:
+        runAsUser: 0
+      initContainers:
+      - name: repo-cloner
+        image: alpine/git
+        command: ['sh', '-c', 'git clone $GIT_REPO /repo; cd /repo; git checkout $COMMIT; git reset --hard']
+        volumeMounts:
+        - name: repo
+          mountPath: /repo
+        env:
+        - name: GIT_REPO
+          value: "https://github.com/${REPO_SLUG}.git"
+        - name: COMMIT
+          value: "${COMMIT}"
+      containers:
+      - name: env-builder
+        image: jupyterhub/singleuser
+        command: ["bash",  "-c", "whoami; ls /; sleep 6000"]
+        volumeMounts:
+        - name: repo
+          mountPath: /repo
+        - name: envs
+          mountPath: /envs
+          subPath: 'envs/auto-build-envs'
+        env:
+        - name: ENV_NAME
+          value: "${ENV_NAME}"
+      volumes:
+      - name: envs
+        persistentVolumeClaim:
+          claimName: pvc-panzure-dev-homespace
+      - name: repo
+        emptyDir: {}
+
+      restartPolicy: Never
+  backoffLimit: 4

@@ -1,0 +1,13 @@
+sudo: required
+language: python
+
+python:
+  - '3.6'
+
+install:
+  - "$TRAVIS_BUILD_DIR/scripts/setup.sh"
+
+deploy:
+- provider: script
+  skip_cleanup: true
+  script: bash $TRAVIS_BUILD_DIR/scripts/launch-build-k8.sh
