@@ -22,7 +22,7 @@ spec:
       containers:
       - name: env-builder
         image: jupyterhub/singleuser
-        command: ["bash",  "-c", "whoami; ls /; sleep 6000"]
+        command: ["bash",  "-c", "cd /repo; ./scripts/build-env.sh"]
         volumeMounts:
         - name: repo
           mountPath: /repo
