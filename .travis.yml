@@ -15,4 +15,4 @@ deploy:
     skip_cleanup: true
     script: bash $TRAVIS_BUILD_DIR/scripts/launch-build-k8.sh
     on:
-      - all_branches: true
+      all_branches: true
