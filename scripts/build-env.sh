@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 set -ex
 
-BASE_DIR="/envs/auto-build-envs"
+ENV_DIR="/envs/auto-build-envs"
+WORK_DIR="/envs/auto-build-envs"
 TMP_ID=$(LC_ALL=C tr -dc 'A-Za-z0-9' </dev/urandom | head -c 9 ; echo)
-UID_DIR="${BASE_DIR}/${TMP_ID}"
-DEST_DIR="${BASE_DIR}/${ENV_NAME}"
-PRE_DELETE_DIR="${DEST_DIR}.tmp"
+UID_DIR="${WORK_DIR}/${TMP_ID}"
+DEST_DIR="${ENV_DIR}/${ENV_NAME}"
 
 # create env in unique location 
 echo "*** Create env in unique location: $UID_DIR"
@@ -26,8 +26,12 @@ ln -s $UID_DIR $DEST_DIR
 # delete old env if exists
 if [ -n "$OLD_TARGET" ]; then
     echo "*** remove old version of $ENV_NAME at $OLD_TARGET"
-    rm -r $OLD_TARGET
-    echo "*** $OLD_TARGET deleted"
+    if rm -rf $OLD_TARGET ; then
+        echo "*** $OLD_TARGET deleted"
+    else
+        echo "*** ERROR deleting $OLD_TARGET"
+    fi
+    
 fi
 
 
