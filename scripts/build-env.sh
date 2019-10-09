@@ -2,7 +2,9 @@
 set -ex
 
 ENV_DIR="/envs/auto-build-envs"
-WORK_DIR="/envs/auto-build-envs"
+WORK_DIR="/envs/work"
+mkdir -p $WORK_DIR
+mkdir -p $ENV_DIR
 TMP_ID=$(LC_ALL=C tr -dc 'A-Za-z0-9' </dev/urandom | head -c 9 ; echo)
 UID_DIR="${WORK_DIR}/${TMP_ID}"
 DEST_DIR="${ENV_DIR}/${ENV_NAME}"
