@@ -29,7 +29,11 @@ if [ -n "$OLD_TARGET" ]; then
     if rm -rf $OLD_TARGET ; then
         echo "*** $OLD_TARGET deleted"
     else
-        echo "*** ERROR deleting $OLD_TARGET"
+        # Sometimes the delete fails. I think this is just the NFS disk not being able to 'keep up'
+        # let's give it 3s and try again, but not worry about success or failure.
+        echo "*** ERROR deleting $OLD_TARGET. Try again after 3s"
+        sleep 3
+        rm -rf $OLD_TARGET || : 
     fi
     
 fi
