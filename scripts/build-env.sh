@@ -12,12 +12,12 @@ echo "*** Create env in unique location: $UID_DIR"
 conda env create -f env.yaml -p $UID_DIR
 
 # Clear existing version if needed
-if [[ -f "$DEST_DIR" ]]; then
+if [[ -d "$DEST_DIR" ]]; then
     echo "*** $DEST_DIR exists. Remove link"
     cd $BASE_DIR
     OLD_TARGET=$(readlink $DEST_DIR) 
     rm $BASE_DIR
-    echo "*** $DEST_DIR link removed. Target $OLD_TARGET"
+    echo "*** $DEST_DIR link removed. Target was $OLD_TARGET"
 fi
 
 # link unique name to env name
@@ -25,7 +25,7 @@ echo "*** Link env from temp location to dest location"
 ln -s $UID_DIR $DEST_DIR
 
 # delete old env if exists
-if [ -z "$OLD_TARGET" ]; then
+if [ -n "$OLD_TARGET" ]; then
     echo "*** remove old version of $ENV_NAME at $OLD_TARGET"
     rm -r $OLD_TARGET
     echo "*** $OLD_TARGET deleted"
