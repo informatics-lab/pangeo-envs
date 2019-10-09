@@ -41,4 +41,4 @@ if [ -n "$OLD_TARGET" ]; then
 fi
 
 
-echo "** Done: ${ENV_NAME} at ${DEST_DIR}"
+echo "*** Done: ${ENV_NAME} at ${DEST_DIR}"
