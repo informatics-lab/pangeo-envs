@@ -14,9 +14,8 @@ conda env create -f env.yaml -p $UID_DIR
 # Clear existing version if needed
 if [[ -d "$DEST_DIR" ]]; then
     echo "*** $DEST_DIR exists. Remove link"
-    cd $BASE_DIR
     OLD_TARGET=$(readlink $DEST_DIR) 
-    rm $BASE_DIR
+    rm $DEST_DIR
     echo "*** $DEST_DIR link removed. Target was $OLD_TARGET"
 fi
 
