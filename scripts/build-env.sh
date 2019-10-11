@@ -13,6 +13,15 @@ DEST_DIR="${ENV_DIR}/${ENV_NAME}"
 echo "*** Create env in unique location: $UID_DIR"
 conda env create -f env.yaml -p $UID_DIR
 
+# if there is post_conda.sh script run it under the newly created env.
+if [ -f post_conda.sh ]; then
+    eval "$('conda' 'shell.bash' 'hook' 2> /dev/null)"
+    ORIG_CONDA_ENV=$CONDA_DEFAULT_ENV
+    conda activate $UID_DIR
+    ./post_conda.sh
+    conda activate $ORIG_CONDA_ENV
+fi
+
 # Clear existing version if needed
 if [[ -d "$DEST_DIR" ]]; then
     echo "*** $DEST_DIR exists. Remove link"
