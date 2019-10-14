@@ -16,9 +16,11 @@ deploy:
     script: bash $TRAVIS_BUILD_DIR/scripts/launch-build-k8.sh panzure-dev
     on:
       all_branches: true
+      tags: false
+      
   - provider: script
     skip_cleanup: true
     script: bash $TRAVIS_BUILD_DIR/scripts/launch-build-k8.sh panzure
     on:
-      tag: true
+      tags: true
 
