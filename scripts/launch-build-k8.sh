@@ -10,8 +10,8 @@ else
 fi
 
 if [ "$TRAVIS_TAG" == "$TRAVIS_BRANCH" ]; then
-# for tag builds the conda_env_name is the part of the tage before :
-    CONDA_ENV=$(echo $TRAVIS_TAG | cut -d ":" -f 1)
+# for tag builds the conda_env_name is the part of the tage before "--"
+    CONDA_ENV=$(echo $TRAVIS_TAG | cut -d "--" -f 1)
 else
     CONDA_ENV="$TRAVIS_BRANCH"
 fi
