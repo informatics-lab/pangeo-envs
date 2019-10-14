@@ -35,7 +35,7 @@ spec:
       volumes:
       - name: envs
         persistentVolumeClaim:
-          claimName: ${PVC__NAME}
+          claimName: ${PVC_NAME}
       - name: repo
         emptyDir: {}
 
