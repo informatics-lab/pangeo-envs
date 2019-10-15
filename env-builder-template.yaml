@@ -21,7 +21,7 @@ spec:
           value: "${COMMIT}"
       containers:
       - name: env-builder-${ENV_NAME}
-        image: jupyterhub/singleuser
+        image: continuumio/miniconda3
         command: ["bash",  "-c", "cd /repo; ./scripts/build-env.sh"]
         volumeMounts:
         - name: repo
@@ -35,7 +35,7 @@ spec:
       volumes:
       - name: envs
         persistentVolumeClaim:
-          claimName: pvc-panzure-dev-homespace
+          claimName: ${PVC_NAME}
       - name: repo
         emptyDir: {}
 
