@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -ex
 
-ENV_DIR="/envs/infrastructure"
+ENV_DIR="/envs/auto-build-envs"
 WORK_DIR="/envs/work"
 mkdir -p $WORK_DIR
 mkdir -p $ENV_DIR
