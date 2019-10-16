@@ -3,11 +3,7 @@ Environments for our pangeo deployment
 
 ## Dont merge into master.
 
-This env is for the `jupyter lab` that runs allowing the users in interact with the other envs (which are kernels).
+Each branch is a different environment. Tagged branches go to the stable environment all untagged pushes go to the dev environment.
 
-The name of the env will be the name of the repo.
-
-Add env vars to travis for all outputs from `scripts/setup_az_sp.sh`
-
-
-
+## Auto build 
+Build on travis will require the outputs from `scripts/setup_az_sp.sh`. You will need to have the Azure CI installed and logged in.
