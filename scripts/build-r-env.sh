@@ -37,6 +37,10 @@ export $ENV_NAME
 Rscript -e 'IRkernel::installspec(name = Sys.getenv("ENV_NAME"), displayname = sprintf("R %s", Sys.getenv("RVERSION")), user = FALSE)'
 conda activate $ORIG_CONDA_ENV
 
+# Move the built kernel to a persistent location.
+mkdir -p /envs/pre-built-envs/kernels/
+mv /usr/local/share/jupyter/kernels/${ENV_NAME} /envs/pre-built-envs/kernels/
+
 # Clear existing version if needed
 if [[ -d "$DEST_DIR" ]]; then
     echo "*** $DEST_DIR exists. Remove link"
